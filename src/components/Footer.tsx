@@ -6,7 +6,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img src="/logo.png" alt="Chick Rocks" className="h-16 w-auto brightness-0 invert" />
+              <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Chick Rocks" className="h-16 w-auto brightness-0 invert" />
               <h3 className="text-3xl font-heading text-primary">CHICK ROCKS</h3>
             </div>
             <p className="text-sm opacity-70">Burger & Fried Chicken</p>

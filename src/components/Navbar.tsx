@@ -7,7 +7,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2">
-              <img src="/logo.png" alt="Chick Rocks" className="h-12 w-auto" />
+              <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Chick Rocks" className="h-12 w-auto" />
               <h1 className="text-2xl font-heading text-primary tracking-wider">CHICK ROCKS</h1>
             </div>
             <div className="hidden md:flex items-center gap-4 text-sm text-muted-foreground">

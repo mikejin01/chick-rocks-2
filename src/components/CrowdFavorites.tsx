@@ -1,10 +1,12 @@
 import { Plus } from "lucide-react";
 
+const base = import.meta.env.BASE_URL;
+
 const favorites = [
-  { name: "Halal Fried Chicken", desc: "Crispy double smash patties with melted cheddar, caramelized onions and signature sauce.", price: "EGP 180", img: "/Halal Fried Chicken.avif" },
-  { name: "Rice Bowls", desc: "Crispy double smash patties with melted cheddar, caramelized onions and signature sauce.", price: "EGP 150", img: "/Rice Bowls.avif" },
-  { name: "Crawfish Sandwich", desc: "Thick local steak patty topped with Sriracha mayo, fresh jalapeños, and crisp pickles.", price: "EGP 165", img: "/Crawfish Sandwich.avif" },
-  { name: "Chicken Burger", desc: "Fried chicken slider topped with hot honey sriracha and creamy slaw on a toasted bun.", price: "EGP 150", img: "/Chicken Burger.avif" },
+  { name: "Halal Fried Chicken", desc: "Crispy double smash patties with melted cheddar, caramelized onions and signature sauce.", price: "EGP 180", img: `${base}Halal Fried Chicken.avif` },
+  { name: "Rice Bowls", desc: "Crispy double smash patties with melted cheddar, caramelized onions and signature sauce.", price: "EGP 150", img: `${base}Rice Bowls.avif` },
+  { name: "Crawfish Sandwich", desc: "Thick local steak patty topped with Sriracha mayo, fresh jalapeños, and crisp pickles.", price: "EGP 165", img: `${base}Crawfish Sandwich.avif` },
+  { name: "Chicken Burger", desc: "Fried chicken slider topped with hot honey sriracha and creamy slaw on a toasted bun.", price: "EGP 150", img: `${base}Chicken Burger.avif` },
 ];
 
 const CrowdFavorites = () => {

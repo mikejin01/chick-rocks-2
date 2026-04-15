@@ -18,7 +18,7 @@ const HeroSection = () => {
           </div>
           <div className="relative">
             <img
-              src="/store-front.avif"
+              src={`${import.meta.env.BASE_URL}store-front.avif`}
               alt="Chick Rocks store front"
               width={1024}
               height={768}
