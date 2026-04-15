@@ -1,5 +1,3 @@
-import heroBurger from "@/assets/hero-burger.jpg";
-
 const HeroSection = () => {
   return (
     <section className="bg-cream relative overflow-hidden">
@@ -7,7 +5,7 @@ const HeroSection = () => {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6">
             <h2 className="text-4xl md:text-6xl font-heading uppercase leading-tight text-foreground">
-              Crafted to perfection,<br />
+              Chick Rocks perfection,<br />
               cooked fast,<br />
               delivered to you.
             </h2>
@@ -20,8 +18,8 @@ const HeroSection = () => {
           </div>
           <div className="relative">
             <img
-              src={heroBurger}
-              alt="Delicious crafted burger"
+              src="/store-front.avif"
+              alt="Chick Rocks store front"
               width={1024}
               height={768}
               className="w-full h-auto rounded-2xl object-cover"

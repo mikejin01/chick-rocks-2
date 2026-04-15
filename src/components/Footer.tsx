@@ -5,7 +5,10 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-3xl font-heading text-primary mb-4">CRAFTED</h3>
+            <div className="flex items-center gap-3 mb-4">
+              <img src="/logo.png" alt="Chick Rocks" className="h-16 w-auto brightness-0 invert" />
+              <h3 className="text-3xl font-heading text-primary">CHICK ROCKS</h3>
+            </div>
             <p className="text-sm opacity-70">Burger & Fried Chicken</p>
           </div>
           <div>
@@ -28,16 +31,21 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-4 text-sm">Location & Hours</h4>
-            <div className="text-sm opacity-70 space-y-2">
-              <p>22 - El Horya Street,<br />Heliopolis, Cairo</p>
-              <p>Mon – Fri: 7 AM – 6 PM</p>
-              <p>Sat: 8 AM – 4 PM</p>
+            <h4 className="font-semibold mb-4 text-sm">Locations</h4>
+            <div className="text-sm opacity-70 space-y-4">
+              <div>
+                <p className="font-semibold opacity-100">Flushing</p>
+                <p>136-20 Roosevelt Ave #25,<br />Flushing, NY 11354</p>
+              </div>
+              <div>
+                <p className="font-semibold opacity-100">Astoria</p>
+                <p>30-02 Steinway St,<br />Astoria, NY 11103</p>
+              </div>
             </div>
           </div>
         </div>
         <div className="border-t border-background/20 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between text-sm opacity-60">
-          <p>© Copyright Crafted Inc. 2026</p>
+          <p>© Copyright Chick Rocks Inc. 2026</p>
           <div className="flex gap-4 mt-4 md:mt-0">
             <a href="#" className="hover:opacity-100 transition-opacity">Privacy policy</a>
             <a href="#" className="hover:opacity-100 transition-opacity">Terms of use</a>

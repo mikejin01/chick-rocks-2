@@ -23,7 +23,7 @@ const AboutSection = () => {
           <div className="relative">
             <img
               src={foodAbout}
-              alt="Stacked crafted burger"
+              alt="Stacked Chick Rocks burger"
               loading="lazy"
               width={640}
               height={512}

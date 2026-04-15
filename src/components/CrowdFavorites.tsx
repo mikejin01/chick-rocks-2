@@ -1,14 +1,10 @@
 import { Plus } from "lucide-react";
-import foodSandwich from "@/assets/food-sandwich.jpg";
-import foodBurger from "@/assets/food-burger.jpg";
-import foodChili from "@/assets/food-chili.jpg";
-import foodSides from "@/assets/food-sides.jpg";
 
 const favorites = [
-  { name: "Sweet Onion Smash", desc: "Crispy double smash patties with melted cheddar, caramelized onions and signature sauce.", price: "EGP 180", img: foodSandwich },
-  { name: "Hot Smash", desc: "Crispy double smash patties with melted cheddar, caramelized onions and signature sauce.", price: "EGP 150", img: foodBurger },
-  { name: "Chili Burger", desc: "Thick local steak patty topped with Sriracha mayo, fresh jalapeños, and crisp pickles.", price: "EGP 165", img: foodChili },
-  { name: "Chicken Slider", desc: "Fried chicken slider topped with hot honey sriracha and creamy slaw on a toasted bun.", price: "EGP 150", img: foodSides },
+  { name: "Halal Fried Chicken", desc: "Crispy double smash patties with melted cheddar, caramelized onions and signature sauce.", price: "EGP 180", img: "/Halal Fried Chicken.avif" },
+  { name: "Rice Bowls", desc: "Crispy double smash patties with melted cheddar, caramelized onions and signature sauce.", price: "EGP 150", img: "/Rice Bowls.avif" },
+  { name: "Crawfish Sandwich", desc: "Thick local steak patty topped with Sriracha mayo, fresh jalapeños, and crisp pickles.", price: "EGP 165", img: "/Crawfish Sandwich.avif" },
+  { name: "Chicken Burger", desc: "Fried chicken slider topped with hot honey sriracha and creamy slaw on a toasted bun.", price: "EGP 150", img: "/Chicken Burger.avif" },
 ];
 
 const CrowdFavorites = () => {
