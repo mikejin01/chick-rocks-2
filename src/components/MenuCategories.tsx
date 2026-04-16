@@ -1,16 +1,16 @@
-import foodSandwich from "@/assets/food-sandwich.jpg";
-import foodPlate from "@/assets/food-plate.jpg";
-import foodDrinks from "@/assets/food-drinks.jpg";
-import foodBurger from "@/assets/food-burger.jpg";
-import foodExtras from "@/assets/food-extras.jpg";
-import foodSides from "@/assets/food-sides.jpg";
+const foodSandwich = `${import.meta.env.BASE_URL}sandwich-1.jpg`;
+const foodPlate = `${import.meta.env.BASE_URL}Rice Bowls.avif`;
+const foodDrinks = `${import.meta.env.BASE_URL}drink-2.jpg`;
+const foodBurger = `${import.meta.env.BASE_URL}hero-3.png`;
+const foodExtras = `${import.meta.env.BASE_URL}spaghetti.jpg`;
+const foodSides = `${import.meta.env.BASE_URL}snack-1.jpg`;
 
 const categories = [
   { name: "Sandwiches", img: foodSandwich },
-  { name: "Plates", img: foodPlate },
+  { name: "Chicken", img: foodBurger },
+  { name: "Rice Bowl", img: foodPlate },
+  { name: "Spaghetti", img: foodExtras },
   { name: "Drinks", img: foodDrinks },
-  { name: "Burgers", img: foodBurger },
-  { name: "Extras", img: foodExtras },
   { name: "Sides", img: foodSides },
 ];
 

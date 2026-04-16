@@ -29,7 +29,7 @@ const Navbar = () => {
             <a href="#about" className="text-foreground hover:text-primary transition-colors">About Us</a>
           </div>
           <div className="flex items-center gap-4">
-            <span className="hidden md:inline text-sm font-semibold text-foreground">EGP 1,530</span>
+            <span className="hidden md:inline text-sm font-semibold text-foreground">$18.98</span>
             <button className="relative text-primary">
               <ShoppingCart className="w-5 h-5" />
               <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs w-4 h-4 rounded-full flex items-center justify-center">2</span>
