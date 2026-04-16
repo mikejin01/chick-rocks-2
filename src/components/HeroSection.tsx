@@ -7,6 +7,9 @@ const slides = [`${base}hero-new-1.jpg`, `${base}hero-new-2.jpg`];
 const COPIES = 5;
 const rendered = Array.from({ length: slides.length * COPIES }, (_, i) => slides[i % slides.length]);
 const MIDDLE = slides.length * Math.floor(COPIES / 2);
+const HIGH_THRESHOLD = slides.length * (COPIES - 1);
+const LOW_THRESHOLD = slides.length;
+const WRAP = slides.length * (COPIES - 2);
 
 const MOBILE_MAX = 639;
 const SLIDE_W_VW_MOBILE = 92;
@@ -23,10 +26,16 @@ const HeroSection = () => {
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== "undefined" && window.innerWidth <= MOBILE_MAX
   );
+
   const trackRef = useRef<HTMLDivElement>(null);
-  const isTransitioning = useRef(false);
+  const vIndexRef = useRef(vIndex);
+  const lockedRef = useRef(false);
   const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const safetyRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const finishTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    vIndexRef.current = vIndex;
+  }, [vIndex]);
 
   const slideW = isMobile ? SLIDE_W_VW_MOBILE : SLIDE_W_VW_DESKTOP;
   const gapPx = isMobile ? GAP_PX_MOBILE : GAP_PX_DESKTOP;
@@ -46,76 +55,101 @@ const HeroSection = () => {
     }
   };
 
-  const armSafetyRelease = () => {
-    if (safetyRef.current) clearTimeout(safetyRef.current);
-    safetyRef.current = setTimeout(() => {
-      isTransitioning.current = false;
-    }, DURATION_MS + 100);
+  const clearFinishTimer = () => {
+    if (finishTimerRef.current) {
+      clearTimeout(finishTimerRef.current);
+      finishTimerRef.current = null;
+    }
+  };
+
+  const finishTransition = (completed: number) => {
+    finishTimerRef.current = null;
+    if (completed >= HIGH_THRESHOLD) {
+      setAnimate(false);
+      setVIndex(completed - WRAP);
+      return;
+    }
+    if (completed < LOW_THRESHOLD) {
+      setAnimate(false);
+      setVIndex(completed + WRAP);
+      return;
+    }
+    lockedRef.current = false;
+  };
+
+  const advance = (next: number) => {
+    if (lockedRef.current) return;
+    lockedRef.current = true;
+    setAnimate(true);
+    setVIndex(next);
+    clearFinishTimer();
+    finishTimerRef.current = setTimeout(() => finishTransition(next), DURATION_MS + 60);
   };
 
   const startAutoplay = () => {
     stopAutoplay();
     if (!playing) return;
+    if (typeof document !== "undefined" && document.hidden) return;
     autoplayRef.current = setInterval(() => {
-      if (isTransitioning.current) return;
-      isTransitioning.current = true;
-      armSafetyRelease();
-      setAnimate(true);
-      setVIndex((v) => v + 1);
+      if (lockedRef.current) return;
+      advance(vIndexRef.current + 1);
     }, AUTOPLAY_MS);
   };
-
-  useEffect(() => {
-    startAutoplay();
-    return () => {
-      stopAutoplay();
-      if (safetyRef.current) clearTimeout(safetyRef.current);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playing]);
 
   useLayoutEffect(() => {
     if (animate || !trackRef.current) return;
     void trackRef.current.getBoundingClientRect();
-    const id = requestAnimationFrame(() => {
+    let done = false;
+    const release = () => {
+      if (done) return;
+      done = true;
       setAnimate(true);
-      isTransitioning.current = false;
-    });
-    return () => cancelAnimationFrame(id);
+      lockedRef.current = false;
+    };
+    const rafId = requestAnimationFrame(release);
+    const toId = setTimeout(release, 80);
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(toId);
+    };
   }, [animate, vIndex]);
 
-  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
-    if (e.target !== e.currentTarget || e.propertyName !== "transform") return;
-    if (vIndex >= slides.length * (COPIES - 1)) {
+  useLayoutEffect(() => {
+    if (vIndex < 0 || vIndex > rendered.length - 1) {
+      clearFinishTimer();
+      lockedRef.current = false;
       setAnimate(false);
-      setVIndex((v) => v - slides.length * (COPIES - 2));
-      return;
+      setVIndex(MIDDLE);
     }
-    if (vIndex < slides.length) {
-      setAnimate(false);
-      setVIndex((v) => v + slides.length * (COPIES - 2));
-      return;
-    }
-    isTransitioning.current = false;
-  };
+  }, [vIndex]);
+
+  useEffect(() => {
+    startAutoplay();
+    const onVis = () => {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    };
+    document.addEventListener("visibilitychange", onVis);
+    return () => {
+      stopAutoplay();
+      clearFinishTimer();
+      document.removeEventListener("visibilitychange", onVis);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playing]);
 
   const nav = (dir: 1 | -1) => {
-    if (isTransitioning.current) return;
-    isTransitioning.current = true;
-    armSafetyRelease();
-    setAnimate(true);
-    setVIndex((v) => v + dir);
+    advance(vIndexRef.current + dir);
     startAutoplay();
   };
 
   const jumpToDot = (i: number) => {
-    if (isTransitioning.current) return;
     const target = MIDDLE + i;
-    if (target === vIndex) return;
-    isTransitioning.current = true;
-    armSafetyRelease();
-    setAnimate(true);
-    setVIndex(target);
+    if (target === vIndexRef.current) return;
+    advance(target);
     startAutoplay();
   };
 
@@ -128,7 +162,6 @@ const HeroSection = () => {
       <div className="relative w-full overflow-hidden">
         <div
           ref={trackRef}
-          onTransitionEnd={handleTransitionEnd}
           className={`flex ${animate ? "transition-transform duration-700 ease-out" : ""}`}
           style={{
             gap: `${gapPx}px`,
