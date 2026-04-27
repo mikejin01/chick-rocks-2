@@ -1,5 +1,6 @@
-import { MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
+import { MapPin, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useEdit } from "@/contexts/EditContext";
 import { InlineEdit } from "@/components/ui/inline-edit";
 import { MediaEdit } from "@/components/ui/media-edit";
@@ -7,6 +8,12 @@ import { MediaEdit } from "@/components/ui/media-edit";
 const Navbar = () => {
   const { isEditing, getDraftValue, updateDraft } = useEdit();
   const base = import.meta.env.BASE_URL;
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
 
   return (
     <nav className="sticky top-0 z-50 bg-card border-b border-border">
@@ -125,7 +132,59 @@ const Navbar = () => {
               />
             </Link>
           </div>
+          <button
+            type="button"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setMobileOpen((v) => !v)}
+            className="md:hidden ml-auto inline-flex items-center justify-center w-10 h-10 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors"
+          >
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+        {mobileOpen && (
+          <div id="mobile-nav" className="md:hidden mt-3 pb-2 flex flex-col gap-1 text-sm font-medium">
+            <Link to="/" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
+              {getDraftValue("nav_link_home", "Home")}
+            </Link>
+            <Link to="/menu" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
+              {getDraftValue("nav_link_menu", "Menu")}
+            </Link>
+            <Link to="/about" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
+              {getDraftValue("nav_link_about", "About Us")}
+            </Link>
+            <Link to="/catering" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
+              {getDraftValue("nav_link_catering", "Catering")}
+            </Link>
+            <Link to="/blog" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
+              {getDraftValue("nav_link_blog", "Blog")}
+            </Link>
+            <Link to="/faq" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
+              {getDraftValue("nav_link_faq", "FAQ")}
+            </Link>
+            <div className="mt-2 pt-2 border-t border-border flex flex-col gap-2 text-muted-foreground">
+              <a
+                href="https://pos.chowbus.com/online-ordering/store/chick-rocks/11843"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-2 py-2 hover:text-primary transition-colors"
+              >
+                <MapPin className="w-4 h-4" />
+                <span>{getDraftValue("nav_location_1", "Flushing, NY")}</span>
+              </a>
+              <a
+                href="https://pos.chowbus.com/online-ordering/store/chick-rocks-astoria/20957"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-2 py-2 hover:text-primary transition-colors"
+              >
+                <MapPin className="w-4 h-4" />
+                <span>{getDraftValue("nav_location_2", "Astoria, NY")}</span>
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

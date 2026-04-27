@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Plus } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Seo, { breadcrumbLd } from "@/components/Seo";
@@ -5,49 +7,100 @@ import { useEdit } from "@/contexts/EditContext";
 import { InlineEdit } from "@/components/ui/inline-edit";
 import { MediaEdit } from "@/components/ui/media-edit";
 
-const faqItems = [
+const faqSections = [
   {
-    q: "Is everything at Chick Rocks halal?",
-    a: "Yes. All of our chicken and meat products are 100% halal-certified. We hand-bread and fry every order fresh, so the whole menu — from the crispy chicken sandwiches and wings to the rice bowls, spaghetti combos and burgers — is halal-friendly.",
+    title: "About Chick Rocks",
+    items: [
+      {
+        q: "What is halal?",
+        a: "Halal means food that is prepared in a way that follows Islamic dietary guidelines. At Chick Rocks, our menu is halal so customers looking for halal fried chicken, sandwiches, rice bowls, and comfort food in Queens can order with confidence.",
+      },
+      {
+        q: "Is all of the food at Chick Rocks halal?",
+        a: "Yes, all menu items at Chick Rocks are halal. We created our menu to serve the growing demand for flavorful halal fried chicken, sandwiches, wings, rice bowls, spaghetti combos, and more in Astoria and Flushing.",
+      },
+      {
+        q: "What makes Chick Rocks different from other fried chicken spots?",
+        a: "Chick Rocks stands out because our fried chicken is seasoned for flavor in every bite. Instead of relying only on dipping sauces, we use homemade spices in the batter so the chicken tastes crispy, juicy, and satisfying on its own.",
+      },
+      {
+        q: "What kind of food does Chick Rocks serve?",
+        a: "Chick Rocks serves halal fried chicken, chicken sandwiches, wings, rice bowls, spaghetti combos, burgers, wraps, sides, desserts, and drinks. Our menu is built around bold flavor, comfort food, and everyday cravings.",
+      },
+      {
+        q: "Do you have allergen or dietary information available?",
+        a: "If you have food allergies or dietary questions, please contact Chick Rocks before ordering. Our team can help you review menu options and answer questions about ingredients, preparation, and halal menu items.",
+      },
+      {
+        q: "Do you have spicy and mild chicken options?",
+        a: "Yes, Chick Rocks offers bold flavor profiles for different tastes, including options for customers who prefer milder comfort food or a spicier fried chicken experience.",
+      },
+    ],
   },
   {
-    q: "Where are your locations and what are your hours?",
-    a: "We have two locations in Queens, New York: Chick Rocks Astoria at 30-02 Steinway St, Astoria, NY 11103, and Chick Rocks Flushing at 136-20 Roosevelt Ave #25, Flushing, NY 11354. Both stores serve halal fried chicken for dine-in, takeout and delivery. Please check our Google Business Profile for up-to-date daily hours.",
+    title: "Ordering & Locations",
+    items: [
+      {
+        q: "Where are your locations and what are your hours?",
+        a: "We have two locations in Queens, New York: Chick Rocks Astoria at 30-02 Steinway St, Astoria, NY 11103, and Chick Rocks Flushing at 136-20 Roosevelt Ave #25, Flushing, NY 11354. Both stores serve halal fried chicken for dine-in, takeout and delivery. Please check our Google Business Profile for up-to-date daily hours.",
+      },
+      {
+        q: "Do you offer family meals or combo meals?",
+        a: "Yes, Chick Rocks offers combo meals and family-style options designed for sharing, making it easy to order for groups, families, or team meals.",
+      },
+      {
+        q: "Can I order online?",
+        a: "Yes, customers can order Chick Rocks online for quick and convenient pickup or delivery, depending on location availability.",
+      },
+      {
+        q: "Do you have current promotions or specials?",
+        a: "Yes, Chick Rocks may offer current promotions, combo specials, or limited-time menu items. Check our menu, homepage, or ordering page for the latest deals.",
+      },
+    ],
   },
   {
-    q: "Do you offer delivery and online ordering?",
-    a: "Yes. You can order online for pickup or delivery directly through our partner at chowbus, and we are also available on major delivery apps. Pickup is available at both the Astoria and Flushing Chick Rocks locations.",
-  },
-  {
-    q: "Where does your halal chicken come from?",
-    a: "We source our chicken from trusted halal-certified suppliers and hand-bread each piece in-house. Every batch is fried fresh to order so you get that signature crispy coating and juicy bite every time.",
-  },
-  {
-    q: "Do you offer halal catering in Queens and NYC?",
-    a: "Yes — halal catering is one of our specialties. We cater office lunches, meetings, parties, weddings and community events across Queens and New York City with family combos, sandwich platters, wing buckets, rice bowl bars and drinks. See our catering page for packages, or email us to get a custom quote.",
-  },
-  {
-    q: "What is the minimum for catering and how much notice do you need?",
-    a: "Catering orders typically serve groups of 10 to 200+ guests. We recommend at least 48 hours of advance notice so we can prep everything fresh. For larger events or weekend peak times, please reach out as early as possible.",
-  },
-  {
-    q: "Do you have vegetarian, gluten-free or allergen-friendly options?",
-    a: "Our menu focuses on fried chicken, so most items contain wheat, egg and dairy. We offer a few non-chicken sides and drinks, and our team is happy to flag ingredients or common allergens when you order. If you have a serious allergy, please mention it before ordering.",
-  },
-  {
-    q: "Are your prices the same for dine-in, takeout and delivery?",
-    a: "Dine-in and pickup prices are the same. Third-party delivery apps (DoorDash, Uber Eats, Grubhub, etc.) may add their own service fees and markups, so prices there can be slightly higher than ordering directly through our online ordering link.",
+    title: "Catering & Events",
+    items: [
+      {
+        q: "Does Chick Rocks offer catering?",
+        a: "Yes, Chick Rocks offers halal catering for office lunches, birthday parties, team meals, family gatherings, and special events in Queens and NYC. Our catering menu includes fried chicken, sandwich platters, wings, rice bowls, spaghetti combos, sides, and drink options.",
+      },
+      {
+        q: "How far in advance should I place a catering order?",
+        a: "For the best availability, we recommend placing catering orders in advance. Lead time may vary depending on order size, menu selection, and location, so it is best to contact Chick Rocks early for large group orders, office catering, or special events.",
+      },
+      {
+        q: "Are there options for large groups or custom catering packages?",
+        a: "Yes, Chick Rocks can help with group orders and catering packages for different event sizes. Whether you need food for a small office lunch or a larger party, our team can help you choose the right halal catering menu for your event.",
+      },
+      {
+        q: "Can I order Chick Rocks for office lunches?",
+        a: "Yes, Chick Rocks is a great choice for office lunch catering in Queens and NYC, with halal fried chicken, sandwich platters, sides, and shareable group meals.",
+      },
+    ],
   },
 ];
+
+const flatFaqItems = faqSections.flatMap((s) => s.items);
 
 const Faq = () => {
   const { isEditing, getDraftValue, updateDraft } = useEdit();
   const base = import.meta.env.BASE_URL;
+  const [openItems, setOpenItems] = useState<Set<number>>(new Set());
+
+  const toggleItem = (idx: number) => {
+    setOpenItems((prev) => {
+      const next = new Set(prev);
+      if (next.has(idx)) next.delete(idx);
+      else next.add(idx);
+      return next;
+    });
+  };
 
   const faqPageLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqItems.map((f) => ({
+    mainEntity: flatFaqItems.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -58,6 +111,8 @@ const Faq = () => {
     { name: "Home", path: "/" },
     { name: "FAQ", path: "/faq" },
   ]);
+
+  let itemCounter = 0;
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -100,7 +155,7 @@ const Faq = () => {
             multiline
             value={getDraftValue(
               "faq_page_hero_subtext",
-              "Everything you need to know about our halal fried chicken, sandwiches, catering, locations in Astoria and Flushing, and ordering."
+              "Everything you need to know about Chick Rocks halal fried chicken, sandwiches, catering, ordering, and our Astoria and Flushing locations."
             )}
             onChange={(v) => updateDraft("faq_page_hero_subtext", v)}
           />
@@ -108,27 +163,74 @@ const Faq = () => {
       </section>
 
       <main className="flex-1 container mx-auto px-4 py-16 max-w-3xl">
-        <div className="space-y-10">
-          {faqItems.map((item, index) => (
-            <article key={item.q} className="border-b border-border pb-8 last:border-b-0">
+        <div className="space-y-14">
+          {faqSections.map((section, sectionIndex) => (
+            <section key={section.title} className="space-y-8">
               <InlineEdit
-                id={`faq_q_${index + 1}`}
+                id={`faq_section_${sectionIndex + 1}_title`}
                 as="h2"
-                className="text-2xl md:text-3xl font-heading uppercase text-foreground mb-4 block"
+                className="text-2xl md:text-3xl font-heading uppercase text-foreground tracking-wide block"
                 isEditing={isEditing}
-                value={getDraftValue(`faq_q_${index + 1}`, item.q)}
-                onChange={(v) => updateDraft(`faq_q_${index + 1}`, v)}
+                value={getDraftValue(
+                  `faq_section_${sectionIndex + 1}_title`,
+                  section.title
+                )}
+                onChange={(v) =>
+                  updateDraft(`faq_section_${sectionIndex + 1}_title`, v)
+                }
               />
-              <InlineEdit
-                id={`faq_a_${index + 1}`}
-                as="p"
-                className="text-base leading-relaxed text-muted-foreground block"
-                isEditing={isEditing}
-                multiline
-                value={getDraftValue(`faq_a_${index + 1}`, item.a)}
-                onChange={(v) => updateDraft(`faq_a_${index + 1}`, v)}
-              />
-            </article>
+              <div className="divide-y divide-border border-y border-border">
+                {section.items.map((item) => {
+                  itemCounter += 1;
+                  const idx = itemCounter;
+                  const isOpen = isEditing || openItems.has(idx);
+                  return (
+                    <article key={item.q}>
+                      <button
+                        type="button"
+                        onClick={() => !isEditing && toggleItem(idx)}
+                        aria-expanded={isOpen}
+                        aria-controls={`faq_a_panel_${idx}`}
+                        className="w-full flex items-start justify-between gap-6 py-5 text-left hover:text-primary transition-colors"
+                      >
+                        <InlineEdit
+                          id={`faq_q_${idx}`}
+                          as="h3"
+                          className="text-base md:text-lg font-medium text-foreground leading-snug block"
+                          isEditing={isEditing}
+                          value={getDraftValue(`faq_q_${idx}`, item.q)}
+                          onChange={(v) => updateDraft(`faq_q_${idx}`, v)}
+                        />
+                        <Plus
+                          aria-hidden="true"
+                          className={`shrink-0 w-5 h-5 mt-1 text-muted-foreground transition-transform duration-300 ${
+                            isOpen ? "rotate-45" : ""
+                          }`}
+                        />
+                      </button>
+                      <div
+                        id={`faq_a_panel_${idx}`}
+                        className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                        }`}
+                      >
+                        <div className="overflow-hidden">
+                          <InlineEdit
+                            id={`faq_a_${idx}`}
+                            as="p"
+                            className="text-base leading-relaxed text-muted-foreground block pb-5 pr-11"
+                            isEditing={isEditing}
+                            multiline
+                            value={getDraftValue(`faq_a_${idx}`, item.a)}
+                            onChange={(v) => updateDraft(`faq_a_${idx}`, v)}
+                          />
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
           ))}
         </div>
 

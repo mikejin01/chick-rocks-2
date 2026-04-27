@@ -83,18 +83,18 @@ const Blog = () => {
             as="h1"
             className="text-4xl md:text-5xl font-heading tracking-wider uppercase block"
             isEditing={isEditing}
-            value={getDraftValue("blog_page_title", "Halal Food & Fried Chicken Blog")}
+            value={getDraftValue("blog_page_title", "The Chick Rocks Blog")}
             onChange={(v) => updateDraft("blog_page_title", v)}
           />
           <InlineEdit
             id="blog_page_hero_subtext"
             as="p"
-            className="text-base md:text-lg opacity-90 max-w-2xl mx-auto block"
+            className="text-base md:text-md opacity-90 max-w-2xl mx-auto block"
             isEditing={isEditing}
             multiline
             value={getDraftValue(
               "blog_page_hero_subtext",
-              "Stories, flavors, and the latest from the Chick Rocks kitchen."
+              "Halal food stories, fried chicken favorites, and the latest from Astoria and Flushing."
             )}
             onChange={(v) => updateDraft("blog_page_hero_subtext", v)}
           />
