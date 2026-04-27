@@ -70,7 +70,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium ml-auto">
-            <a href="#" className="text-primary">
+            <Link to="/" className="text-foreground hover:text-primary transition-colors">
               <InlineEdit
                 id="nav_link_home"
                 as="span"
@@ -78,7 +78,7 @@ const Navbar = () => {
                 value={getDraftValue("nav_link_home", "Home")}
                 onChange={(v) => updateDraft("nav_link_home", v)}
               />
-            </a>
+            </Link>
             <Link to="/menu" className="text-foreground hover:text-primary transition-colors">
               <InlineEdit
                 id="nav_link_menu"
