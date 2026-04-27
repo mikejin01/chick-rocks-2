@@ -1,15 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ShoppingBag, Bike, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
-
-const base = import.meta.env.BASE_URL;
-const slides = [`${base}hero-new-1.jpg`, `${base}hero-new-2.jpg`];
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { MapPin, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { useEdit } from "@/contexts/EditContext";
+import { InlineEdit } from "@/components/ui/inline-edit";
+import { MediaEdit } from "@/components/ui/media-edit";
 
 const COPIES = 5;
-const rendered = Array.from({ length: slides.length * COPIES }, (_, i) => slides[i % slides.length]);
-const MIDDLE = slides.length * Math.floor(COPIES / 2);
-const HIGH_THRESHOLD = slides.length * (COPIES - 1);
-const LOW_THRESHOLD = slides.length;
-const WRAP = slides.length * (COPIES - 2);
 
 const MOBILE_MAX = 639;
 const SLIDE_W_VW_MOBILE = 92;
@@ -20,6 +15,26 @@ const DURATION_MS = 700;
 const AUTOPLAY_MS = 5000;
 
 const HeroSection = () => {
+  const { isEditing, getDraftValue, updateDraft } = useEdit();
+  const base = import.meta.env.BASE_URL;
+
+  const slides = useMemo(
+    () => [
+      getDraftValue("hero_slide_1_img", `${base}hero-new-1.webp`),
+      getDraftValue("hero_slide_2_img", `${base}hero-new-2.webp`),
+    ],
+    [getDraftValue, base]
+  );
+
+  const rendered = useMemo(
+    () => Array.from({ length: slides.length * COPIES }, (_, i) => slides[i % slides.length]),
+    [slides]
+  );
+  const MIDDLE = slides.length * Math.floor(COPIES / 2);
+  const HIGH_THRESHOLD = slides.length * (COPIES - 1);
+  const LOW_THRESHOLD = slides.length;
+  const WRAP = slides.length * (COPIES - 2);
+
   const [vIndex, setVIndex] = useState(MIDDLE);
   const [playing, setPlaying] = useState(true);
   const [animate, setAnimate] = useState(true);
@@ -121,7 +136,7 @@ const HeroSection = () => {
       setAnimate(false);
       setVIndex(MIDDLE);
     }
-  }, [vIndex]);
+  }, [vIndex, rendered.length, MIDDLE]);
 
   useEffect(() => {
     startAutoplay();
@@ -171,6 +186,9 @@ const HeroSection = () => {
         >
           {rendered.map((src, i) => {
             const isCenter = i === vIndex;
+            const slideIndex = i % slides.length;
+            const slideKey = slideIndex === 0 ? "hero_slide_1_img" : "hero_slide_2_img";
+            const defaultSrc = slideIndex === 0 ? `${base}hero-new-1.webp` : `${base}hero-new-2.webp`;
             return (
               <div
                 key={i}
@@ -179,12 +197,28 @@ const HeroSection = () => {
                 }`}
                 style={{ width: `${slideW}vw` }}
               >
-                <img
-                  src={src}
-                  alt="Chick Rocks featured promotion"
-                  loading="lazy"
-                  className="block w-full h-auto sm:h-[500px] md:h-[640px] sm:object-contain bg-cream"
-                />
+                {isCenter && isEditing ? (
+                  <MediaEdit
+                    id={slideKey}
+                    isEditing={isEditing}
+                    value={getDraftValue(slideKey, defaultSrc)}
+                    onChange={(v) => updateDraft(slideKey, v)}
+                  >
+                    <img
+                      src={src}
+                      alt="Chick Rocks featured promotion"
+                      loading="lazy"
+                      className="block w-full h-auto sm:h-[500px] md:h-[640px] sm:object-contain bg-cream"
+                    />
+                  </MediaEdit>
+                ) : (
+                  <img
+                    src={src}
+                    alt="Chick Rocks featured promotion"
+                    loading="lazy"
+                    className="block w-full h-auto sm:h-[500px] md:h-[640px] sm:object-contain bg-cream"
+                  />
+                )}
               </div>
             );
           })}
@@ -229,14 +263,36 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto px-4 mt-6 flex flex-row items-center justify-center gap-3 sm:gap-4">
-        <button className="flex flex-1 sm:flex-none items-center justify-center gap-2 bg-primary text-primary-foreground px-4 sm:px-10 py-3 sm:py-4 rounded-full font-bold hover:opacity-90 transition-opacity sm:min-w-[220px]">
-          <ShoppingBag className="w-5 h-5" />
-          Order Pickup
-        </button>
-        <button className="flex flex-1 sm:flex-none items-center justify-center gap-2 bg-primary text-primary-foreground px-4 sm:px-10 py-3 sm:py-4 rounded-full font-bold hover:opacity-90 transition-opacity sm:min-w-[220px]">
-          <Bike className="w-5 h-5" />
-          Order Delivery
-        </button>
+        <a
+          href="https://pos.chowbus.com/online-ordering/store/chick-rocks/11843"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-1 sm:flex-none items-center justify-center gap-2 bg-primary text-primary-foreground px-4 sm:px-10 py-3 sm:py-4 rounded-full font-bold hover:opacity-90 transition-opacity sm:min-w-[220px]"
+        >
+          <MapPin className="w-5 h-5" />
+          <InlineEdit
+            id="hero_cta_location_1"
+            as="span"
+            isEditing={isEditing}
+            value={getDraftValue("hero_cta_location_1", "Flushing, NY")}
+            onChange={(v) => updateDraft("hero_cta_location_1", v)}
+          />
+        </a>
+        <a
+          href="https://pos.chowbus.com/online-ordering/store/chick-rocks-astoria/20957"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-1 sm:flex-none items-center justify-center gap-2 bg-primary text-primary-foreground px-4 sm:px-10 py-3 sm:py-4 rounded-full font-bold hover:opacity-90 transition-opacity sm:min-w-[220px]"
+        >
+          <MapPin className="w-5 h-5" />
+          <InlineEdit
+            id="hero_cta_location_2"
+            as="span"
+            isEditing={isEditing}
+            value={getDraftValue("hero_cta_location_2", "Astoria, NY")}
+            onChange={(v) => updateDraft("hero_cta_location_2", v)}
+          />
+        </a>
       </div>
     </section>
   );

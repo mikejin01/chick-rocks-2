@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Generated WordPress theme output
+wordpress-theme
+wordpress-theme-upload
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

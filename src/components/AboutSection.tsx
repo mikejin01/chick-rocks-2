@@ -1,105 +1,130 @@
-import foodChickenClose from "@/assets/food-chicken-close.jpg";
-import foodBurger from "@/assets/food-burger.jpg";
+import { useEdit } from "@/contexts/EditContext";
+import { InlineEdit } from "@/components/ui/inline-edit";
+import { MediaEdit } from "@/components/ui/media-edit";
 
 const AboutSection = () => {
+  const { isEditing, getDraftValue, updateDraft } = useEdit();
+  const base = import.meta.env.BASE_URL;
+
+  const rewardsImg = `${base}Chick-Rocks-Rewards.png`;
+  const rewardsAlt =
+    "Chick Rocks Rewards program — earn points on every halal chicken order";
+
   return (
-    <section id="about" className="py-24 bg-cream">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-24 items-center min-h-[600px]">
-          <div className="max-w-lg space-y-6 order-2 md:order-1">
-            <p className="text-accent font-bold uppercase tracking-wide text-sm">
-              Earn With Chick Rocks
-            </p>
-            <h2 className="text-4xl md:text-5xl font-heading uppercase leading-tight text-foreground">
-              Chick Rocks Rewards
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              If you love Chick Rocks, sign up to become a Chick Rocks Rewards member. Every dollar you spend earns you points toward free Chick Rocks food. You can also login online or on the Chick Rocks App to score offers on crunchy deals.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Get <span className="font-bold text-foreground">100 bonus points</span> when you join with code{" "}
-              <span className="font-bold text-foreground">HATCH100</span>.
-            </p>
-            <div>
-              <a
-                href="#"
-                className="inline-block text-accent font-bold uppercase tracking-wide text-sm border-b-2 border-accent pb-1 hover:opacity-80 transition-opacity"
+    <section id="about" className="relative py-24 bg-card overflow-hidden">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.07)_0%,transparent_65%)]"
+      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 grain-overlay" />
+
+      <div className="container relative mx-auto px-4">
+        <InlineEdit
+          id="about_heading"
+          as="h2"
+          className="text-4xl md:text-5xl font-heading uppercase leading-tight text-foreground text-center mb-4 block"
+          isEditing={isEditing}
+          value={getDraftValue("about_heading", "Chick Rocks Rewards")}
+          onChange={(v) => updateDraft("about_heading", v)}
+        />
+
+        <InlineEdit
+          id="about_subheading"
+          as="p"
+          className="text-base md:text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-16 block"
+          isEditing={isEditing}
+          value={getDraftValue(
+            "about_subheading",
+            "Earn rewards on your favorite halal chicken meals, sandwiches, and combos every time you order."
+          )}
+          onChange={(v) => updateDraft("about_subheading", v)}
+        />
+
+        <div className="relative mx-auto w-full max-w-sm sm:max-w-md md:max-w-lg">
+          <div
+            aria-hidden
+            className="absolute -inset-20 sm:-inset-28 rewards-sunburst animate-spin-slow"
+          />
+
+          <svg
+            aria-hidden
+            viewBox="0 0 100 100"
+            fill="currentColor"
+            className="absolute -top-8 -left-6 sm:-top-10 sm:-left-10 w-12 h-12 sm:w-16 sm:h-16 text-accent drop-shadow-md animate-spin-slow z-20"
+          >
+            <path d="M50 0 L58 38 L96 42 L66 62 L78 98 L50 76 L22 98 L34 62 L4 42 L42 38 Z" />
+          </svg>
+
+          <div className="absolute -top-10 -right-6 sm:-top-14 sm:-right-12 w-28 h-28 sm:w-36 sm:h-36 z-20 animate-spin-reverse">
+            <svg viewBox="0 0 200 200" className="w-full h-full drop-shadow-lg">
+              <defs>
+                <path
+                  id="rewards-badge-arc"
+                  d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0"
+                />
+              </defs>
+              <circle cx="100" cy="100" r="92" fill="hsl(var(--accent))" />
+              <circle cx="100" cy="100" r="64" fill="hsl(var(--primary))" />
+              <text
+                fontFamily="Anton, sans-serif"
+                fontSize="20"
+                letterSpacing="3"
+                fill="hsl(var(--accent-foreground))"
               >
-                Learn More
-              </a>
-            </div>
-            <button className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold hover:opacity-90 transition-opacity">
-              Sign Up
-            </button>
+                <textPath href="#rewards-badge-arc" startOffset="0">
+                  EARN • EAT • REPEAT • CHICK ROCKS •
+                </textPath>
+              </text>
+              <text
+                x="100"
+                y="112"
+                textAnchor="middle"
+                fontFamily="Anton, sans-serif"
+                fontSize="36"
+                fill="hsl(var(--primary-foreground))"
+              >
+                JOIN
+              </text>
+            </svg>
           </div>
 
-          <div className="relative flex justify-center order-1 md:order-2">
-            <div className="relative w-[280px] h-[580px] bg-foreground rounded-[3rem] p-3 shadow-2xl">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-foreground rounded-b-2xl z-10" />
-              <div className="w-full h-full bg-background rounded-[2.3rem] overflow-hidden flex flex-col">
-                <div className="bg-primary text-primary-foreground px-5 pt-8 pb-4">
-                  <div className="flex items-center justify-between text-xs font-semibold mb-3">
-                    <span>2:50</span>
-                    <span>•••</span>
-                  </div>
-                  <p className="font-heading text-2xl uppercase tracking-wide">Rewards</p>
-                </div>
+          {(() => {
+            const poster = (
+              <MediaEdit
+                id="rewards_poster"
+                isEditing={isEditing}
+                value={getDraftValue("rewards_poster", rewardsImg)}
+                onChange={(v) => updateDraft("rewards_poster", v)}
+                className="relative z-10 rounded-2xl overflow-hidden shadow-2xl shadow-primary/40 ring-1 ring-black/5 transition-transform duration-500 ease-out hover:-translate-y-1 hover:rotate-[0.5deg]"
+              >
+                <img
+                  src={getDraftValue("rewards_poster", rewardsImg)}
+                  alt={rewardsAlt}
+                  loading="lazy"
+                  className="block w-full h-auto"
+                />
+              </MediaEdit>
+            );
 
-                <div className="px-4 pt-4">
-                  <div className="flex bg-muted rounded-full p-1 text-xs font-bold">
-                    <div className="flex-1 text-center py-2 bg-background text-foreground rounded-full shadow-sm">
-                      Offers
-                    </div>
-                    <div className="flex-1 text-center py-2 text-muted-foreground">
-                      Rewards
-                    </div>
-                  </div>
-                </div>
+            if (isEditing) return poster;
 
-                <div className="grid grid-cols-2 gap-3 p-4">
-                  <div className="bg-card border border-border rounded-xl p-2 flex flex-col items-center">
-                    <div className="w-full h-20 rounded-lg overflow-hidden mb-2">
-                      <img src={foodChickenClose} alt="" className="w-full h-full object-cover" />
-                    </div>
-                    <p className="text-[10px] font-bold text-foreground text-center leading-tight">
-                      Free 3pc Tenders
-                    </p>
-                    <div className="flex items-center gap-1 mt-1">
-                      <span className="w-3 h-3 bg-primary rounded-full text-[7px] text-primary-foreground flex items-center justify-center font-bold">
-                        C
-                      </span>
-                      <span className="text-[9px] font-semibold text-foreground">250 PTS</span>
-                    </div>
-                  </div>
+            return (
+              <a
+                href="https://loyalty.chowbus.com/v2/83CG47U/landing"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Join Chick Rocks Rewards on Chowbus"
+                className="block relative z-10 rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/50"
+              >
+                {poster}
+              </a>
+            );
+          })()}
 
-                  <div className="bg-card border border-border rounded-xl p-2 flex flex-col items-center">
-                    <div className="w-full h-20 rounded-lg overflow-hidden mb-2">
-                      <img src={foodBurger} alt="" className="w-full h-full object-cover" />
-                    </div>
-                    <p className="text-[10px] font-bold text-foreground text-center leading-tight">
-                      Smash Burger
-                    </p>
-                    <div className="flex items-center gap-1 mt-1">
-                      <span className="w-3 h-3 bg-primary rounded-full text-[7px] text-primary-foreground flex items-center justify-center font-bold">
-                        C
-                      </span>
-                      <span className="text-[9px] font-semibold text-foreground">500 PTS</span>
-                    </div>
-                  </div>
-
-                  <div className="bg-card border border-border rounded-xl p-2 flex flex-col items-center col-span-2">
-                    <p className="text-[10px] font-bold text-foreground text-center">
-                      $5 off $25 Order
-                    </p>
-                    <div className="flex items-center gap-1 mt-1">
-                      <span className="w-3 h-3 bg-primary rounded-full text-[7px] text-primary-foreground flex items-center justify-center font-bold">
-                        C
-                      </span>
-                      <span className="text-[9px] font-semibold text-foreground">750 PTS</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div className="absolute -bottom-5 -right-3 sm:-bottom-7 sm:-right-8 z-20 -rotate-[8deg]">
+            <div className="bg-foreground text-background font-heading uppercase tracking-widest text-sm sm:text-base px-4 py-2 rounded-md shadow-xl ring-2 ring-background">
+              <span className="text-primary mr-1.5">★</span>
+              Tap to Join
             </div>
           </div>
         </div>
