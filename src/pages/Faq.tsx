@@ -196,7 +196,7 @@ const Faq = () => {
                         <InlineEdit
                           id={`faq_q_${idx}`}
                           as="h3"
-                          className="text-base md:text-lg font-medium text-foreground leading-snug block"
+                          className="text-base md:text-lg font-body font-normal text-foreground leading-snug block"
                           isEditing={isEditing}
                           value={getDraftValue(`faq_q_${idx}`, item.q)}
                           onChange={(v) => updateDraft(`faq_q_${idx}`, v)}
