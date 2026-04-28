@@ -6,7 +6,7 @@ import { MediaEdit } from "@/components/ui/media-edit";
 const FeaturedMeals = () => {
   const { isEditing, getDraftValue, updateDraft } = useEdit();
   const base = import.meta.env.BASE_URL;
-  const defaultImg = `${base}Chicken-1.avif`;
+  const defaultImg = `${base}chicken-1.webp`;
 
   return (
     <section className="py-24 bg-card">

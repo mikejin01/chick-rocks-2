@@ -33,6 +33,10 @@ const SPECS = [
   { src: "drink-2.jpg",        maxWidth: 400,  quality: 80 },
   { src: "snack-1.jpg",        maxWidth: 800,  quality: 80 },
   { src: "catering-2.png",     maxWidth: 1200, quality: 82 },
+  { src: "DSC06408.jpg",       maxWidth: 800,  quality: 80 },
+  { src: "promo-1.png",        maxWidth: 1200, quality: 82 },
+  { src: "store-front-1.avif", maxWidth: 800,  quality: 80 },
+  { src: "Chicken-1.avif",     maxWidth: 800,  quality: 80, out: "chicken-1.webp" },
 ];
 
 const log = (...a) => console.log("[optimize]", ...a);

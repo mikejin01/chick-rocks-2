@@ -43,9 +43,9 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <MenuCategories />
-      <CrowdFavorites />
-      <FeaturedMeals />
       <CateringCta />
+      <FeaturedMeals />
+      <CrowdFavorites />
       <AboutSection />
       <Footer />
     </div>

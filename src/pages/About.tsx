@@ -46,7 +46,7 @@ const About = () => {
         description="Chick Rocks brings bold halal fried chicken, sandwiches, rice bowls and spaghetti combos to Astoria and Flushing, Queens. 100% halal, hand-breaded and fried fresh to order."
         path="/about"
         keywords="chick rocks story, halal fried chicken astoria, halal restaurant queens, chinese american halal"
-        image={`${SITE.URL}/store-front-1.avif`}
+        image={`${SITE.URL}/store-front-1.webp`}
         imageAlt="Chick Rocks Astoria storefront — halal fried chicken"
         jsonLd={[aboutLd, aboutCrumbsLd]}
       />
@@ -121,12 +121,12 @@ const About = () => {
                     <MediaEdit
                       id="about_v3_polaroid_1"
                       isEditing={isEditing}
-                      value={getDraftValue("about_v3_polaroid_1", `${base}store-front-1.avif`)}
+                      value={getDraftValue("about_v3_polaroid_1", `${base}store-front-1.webp`)}
                       onChange={(v) => updateDraft("about_v3_polaroid_1", v)}
                       className="block"
                     >
                       <img
-                        src={getDraftValue("about_v3_polaroid_1", `${base}store-front-1.avif`)}
+                        src={getDraftValue("about_v3_polaroid_1", `${base}store-front-1.webp`)}
                         alt="Chick Rocks storefront in Astoria, Queens"
                         loading="lazy"
                         className="w-full aspect-[4/5] object-cover"
@@ -140,12 +140,12 @@ const About = () => {
                     <MediaEdit
                       id="about_v3_polaroid_2"
                       isEditing={isEditing}
-                      value={getDraftValue("about_v3_polaroid_2", `${base}Chicken-1.avif`)}
+                      value={getDraftValue("about_v3_polaroid_2", `${base}chicken-1.webp`)}
                       onChange={(v) => updateDraft("about_v3_polaroid_2", v)}
                       className="block"
                     >
                       <img
-                        src={getDraftValue("about_v3_polaroid_2", `${base}Chicken-1.avif`)}
+                        src={getDraftValue("about_v3_polaroid_2", `${base}chicken-1.webp`)}
                         alt="Chick Rocks halal fried chicken"
                         loading="lazy"
                         className="w-full aspect-[5/4] object-cover"
@@ -352,12 +352,12 @@ const About = () => {
                     <MediaEdit
                       id="about_v3_polaroid_4"
                       isEditing={isEditing}
-                      value={getDraftValue("about_v3_polaroid_4", `${base}DSC06408.jpg`)}
+                      value={getDraftValue("about_v3_polaroid_4", `${base}DSC06408.webp`)}
                       onChange={(v) => updateDraft("about_v3_polaroid_4", v)}
                       className="block"
                     >
                       <img
-                        src={getDraftValue("about_v3_polaroid_4", `${base}DSC06408.jpg`)}
+                        src={getDraftValue("about_v3_polaroid_4", `${base}DSC06408.webp`)}
                         alt="Chick Rocks halal meal"
                         loading="lazy"
                         className="w-full aspect-[5/4] object-cover"
@@ -536,12 +536,12 @@ const About = () => {
             <MediaEdit
               id="about_page_img_2"
               isEditing={isEditing}
-              value={getDraftValue("about_page_img_2", `${base}promo-1.png`)}
+              value={getDraftValue("about_page_img_2", `${base}promo-1.webp`)}
               onChange={(v) => updateDraft("about_page_img_2", v)}
               className="flex justify-center md:justify-end order-1 md:order-2"
             >
               <img
-                src={getDraftValue("about_page_img_2", `${base}promo-1.png`)}
+                src={getDraftValue("about_page_img_2", `${base}promo-1.webp`)}
                 alt="Chick Rocks menu favorites including sandwiches, rice bowls, and sides"
                 loading="lazy"
                 className="w-full max-w-[600px] h-auto max-h-[560px] object-contain rounded-3xl"
