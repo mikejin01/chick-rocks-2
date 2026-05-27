@@ -16,7 +16,7 @@ const AUTOPLAY_MS = 5000;
 
 const HeroSection = () => {
   const { isEditing, getDraftValue, updateDraft } = useEdit();
-  const base = import.meta.env.BASE_URL;
+  const base = "/";
 
   const slides = useMemo(
     () => [

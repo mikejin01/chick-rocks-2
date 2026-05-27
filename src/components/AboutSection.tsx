@@ -4,7 +4,7 @@ import { MediaEdit } from "@/components/ui/media-edit";
 
 const AboutSection = () => {
   const { isEditing, getDraftValue, updateDraft } = useEdit();
-  const base = import.meta.env.BASE_URL;
+  const base = "/";
 
   const qrImg = `${base}reward-qr.png`;
 

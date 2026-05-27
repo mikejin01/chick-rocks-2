@@ -1,0 +1,130 @@
+[
+  {
+    "id": "crispy-wings-30",
+    "category": "Wings",
+    "name": "Crispy Wings (Spicy/Mild) 30 Pieces",
+    "description": "Your choice of Spicy/Mild crispy, fried chicken wings",
+    "price_cents": 2999,
+    "image": "/menu-images/chicken_wings_no_logo.png",
+    "options": ["Spicy", "Mild"],
+    "in_stock": true
+  },
+  {
+    "id": "crispy-wings-50",
+    "category": "Wings",
+    "name": "Crispy Wings (Spicy/Mild) 50 Pieces",
+    "description": "Your choice of Spicy/Mild crispy, fried chicken wings",
+    "price_cents": 4499,
+    "image": "/menu-images/chicken_wings_no_logo.png",
+    "options": ["Spicy", "Mild"],
+    "in_stock": true
+  },
+  {
+    "id": "slider-10",
+    "category": "Sandwiches",
+    "name": "10 Sliders",
+    "description": "Ten mini chicken sliders on soft toasted buns, perfect for sharing",
+    "price_cents": 3499,
+    "image": "/menu-images/burgersandwich-classic_cheese_burger.jpg",
+    "in_stock": true
+  },
+  {
+    "id": "slider-25",
+    "category": "Sandwiches",
+    "name": "25 Sliders",
+    "description": "Twenty-five mini chicken sliders on soft toasted buns, perfect for sharing",
+    "price_cents": 8499,
+    "image": "/menu-images/burgersandwich-classic_cheese_burger.jpg",
+    "in_stock": true
+  },
+  {
+    "id": "slider-50",
+    "category": "Sandwiches",
+    "name": "50 Sliders",
+    "description": "Fifty mini chicken sliders on soft toasted buns, perfect for sharing",
+    "price_cents": 14999,
+    "image": "/menu-images/burgersandwich-classic_cheese_burger.jpg",
+    "in_stock": true
+  },
+  {
+    "id": "chicken-sandwich-10",
+    "category": "Sandwiches",
+    "name": "10 Chicken Sandwiches",
+    "description": "Ten crispy chicken sandwiches loaded with all the fixings",
+    "price_cents": 6999,
+    "image": "/menu-images/burgersandwich-deluxe_chicken_sandwich.jpg",
+    "in_stock": true
+  },
+  {
+    "id": "chicken-sandwich-25",
+    "category": "Sandwiches",
+    "name": "25 Chicken Sandwiches",
+    "description": "Twenty-five crispy chicken sandwiches loaded with all the fixings",
+    "price_cents": 16499,
+    "image": "/menu-images/burgersandwich-deluxe_chicken_sandwich.jpg",
+    "in_stock": true
+  },
+  {
+    "id": "chicken-sandwich-50",
+    "category": "Sandwiches",
+    "name": "50 Chicken Sandwiches",
+    "description": "Fifty crispy chicken sandwiches loaded with all the fixings",
+    "price_cents": 29999,
+    "image": "/menu-images/burgersandwich-deluxe_chicken_sandwich.jpg",
+    "in_stock": true
+  },
+  {
+    "id": "fried-chicken-20",
+    "category": "Fried Chicken",
+    "name": "Fried Chicken 20 Pieces",
+    "description": "Twenty pieces of golden, crispy fried chicken",
+    "price_cents": 4599,
+    "image": "/menu-images/mix_chicken_combo-12pc_chicken_only.jpg",
+    "in_stock": true
+  },
+  {
+    "id": "fried-chicken-30",
+    "category": "Fried Chicken",
+    "name": "Fried Chicken 30 Pieces",
+    "description": "Thirty pieces of golden, crispy fried chicken",
+    "price_cents": 5999,
+    "image": "/menu-images/mix_chicken_combo-12pc_chicken_only.jpg",
+    "in_stock": true
+  },
+  {
+    "id": "fried-chicken-50",
+    "category": "Fried Chicken",
+    "name": "Fried Chicken 50 Pieces",
+    "description": "Fifty pieces of golden, crispy fried chicken",
+    "price_cents": 9999,
+    "image": "/menu-images/mix_chicken_combo-12pc_chicken_only.jpg",
+    "in_stock": true
+  },
+  {
+    "id": "tender-20",
+    "category": "Fried Chicken",
+    "name": "Tenders 20 Pieces",
+    "description": "Twenty hand-breaded, crispy chicken tenders",
+    "price_cents": 4599,
+    "image": "/menu-images/snack-crispy_tenders.jpg",
+    "in_stock": true
+  },
+  {
+    "id": "tender-30",
+    "category": "Fried Chicken",
+    "name": "Tenders 30 Pieces",
+    "description": "Thirty hand-breaded, crispy chicken tenders",
+    "price_cents": 5999,
+    "image": "/menu-images/snack-crispy_tenders.jpg",
+    "in_stock": true
+  },
+  {
+    "id": "tender-50",
+    "category": "Fried Chicken",
+    "name": "Tenders 50 Pieces",
+    "description": "Fifty hand-breaded, crispy chicken tenders",
+    "price_cents": 9999,
+    "image": "/menu-images/snack-crispy_tenders.jpg",
+    "in_stock": true
+  }
+]

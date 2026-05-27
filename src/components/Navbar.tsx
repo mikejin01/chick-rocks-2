@@ -1,6 +1,7 @@
 import { MapPin, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEdit } from "@/contexts/EditContext";
 import { useOrderModal } from "@/contexts/OrderModalContext";
 import { InlineEdit } from "@/components/ui/inline-edit";
@@ -9,20 +10,20 @@ import { MediaEdit } from "@/components/ui/media-edit";
 const Navbar = () => {
   const { isEditing, getDraftValue, updateDraft } = useEdit();
   const { open: openOrderModal } = useOrderModal();
-  const base = import.meta.env.BASE_URL;
+  const base = "/";
   const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     setMobileOpen(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
   return (
     <nav className="sticky top-0 z-50 bg-card border-b border-border">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-8">
-            <Link to="/" className="flex items-center gap-2" aria-label="Chick Rocks home">
+            <Link href="/" className="flex items-center gap-2" aria-label="Chick Rocks home">
               <MediaEdit
                 id="nav_logo_img"
                 isEditing={isEditing}
@@ -79,7 +80,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium ml-auto">
-            <Link to="/" className="text-foreground hover:text-primary transition-colors">
+            <Link href="/" className="text-foreground hover:text-primary transition-colors">
               <InlineEdit
                 id="nav_link_home"
                 as="span"
@@ -88,7 +89,7 @@ const Navbar = () => {
                 onChange={(v) => updateDraft("nav_link_home", v)}
               />
             </Link>
-            <Link to="/menu" className="text-foreground hover:text-primary transition-colors">
+            <Link href="/menu" className="text-foreground hover:text-primary transition-colors">
               <InlineEdit
                 id="nav_link_menu"
                 as="span"
@@ -97,7 +98,7 @@ const Navbar = () => {
                 onChange={(v) => updateDraft("nav_link_menu", v)}
               />
             </Link>
-            <Link to="/about" className="text-foreground hover:text-primary transition-colors">
+            <Link href="/about" className="text-foreground hover:text-primary transition-colors">
               <InlineEdit
                 id="nav_link_about"
                 as="span"
@@ -106,7 +107,7 @@ const Navbar = () => {
                 onChange={(v) => updateDraft("nav_link_about", v)}
               />
             </Link>
-            <Link to="/catering" className="text-foreground hover:text-primary transition-colors">
+            <Link href="/catering" className="text-foreground hover:text-primary transition-colors">
               <InlineEdit
                 id="nav_link_catering"
                 as="span"
@@ -115,7 +116,7 @@ const Navbar = () => {
                 onChange={(v) => updateDraft("nav_link_catering", v)}
               />
             </Link>
-            <Link to="/blog" className="text-foreground hover:text-primary transition-colors">
+            <Link href="/blog" className="text-foreground hover:text-primary transition-colors">
               <InlineEdit
                 id="nav_link_blog"
                 as="span"
@@ -124,7 +125,7 @@ const Navbar = () => {
                 onChange={(v) => updateDraft("nav_link_blog", v)}
               />
             </Link>
-            <Link to="/faq" className="text-foreground hover:text-primary transition-colors">
+            <Link href="/faq" className="text-foreground hover:text-primary transition-colors">
               <InlineEdit
                 id="nav_link_faq"
                 as="span"
@@ -154,22 +155,22 @@ const Navbar = () => {
         </div>
         {mobileOpen && (
           <div id="mobile-nav" className="md:hidden mt-3 pb-2 flex flex-col gap-1 text-sm font-medium">
-            <Link to="/" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
+            <Link href="/" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
               {getDraftValue("nav_link_home", "Home")}
             </Link>
-            <Link to="/menu" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
+            <Link href="/menu" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
               {getDraftValue("nav_link_menu", "Menu")}
             </Link>
-            <Link to="/about" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
+            <Link href="/about" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
               {getDraftValue("nav_link_about", "About Us")}
             </Link>
-            <Link to="/catering" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
+            <Link href="/catering" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
               {getDraftValue("nav_link_catering", "Catering")}
             </Link>
-            <Link to="/blog" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
+            <Link href="/blog" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
               {getDraftValue("nav_link_blog", "Blog")}
             </Link>
-            <Link to="/faq" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
+            <Link href="/faq" className="px-2 py-2 rounded-md text-foreground hover:text-primary hover:bg-muted transition-colors">
               {getDraftValue("nav_link_faq", "FAQ")}
             </Link>
             <button

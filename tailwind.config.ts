@@ -13,8 +13,8 @@ export default {
       },
     },
     fontFamily: {
-      heading: ['Anton', 'sans-serif'],
-      body: ['Inter', 'sans-serif'],
+      heading: ['Poppins', 'sans-serif'],
+      body: ['"Hanken Grotesk"', 'sans-serif'],
     },
     extend: {
       colors: {

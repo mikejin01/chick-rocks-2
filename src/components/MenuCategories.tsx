@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { useEdit } from "@/contexts/EditContext";
 import { InlineEdit } from "@/components/ui/inline-edit";
 import { MediaEdit } from "@/components/ui/media-edit";
 
 const MenuCategories = () => {
   const { isEditing, getDraftValue, updateDraft } = useEdit();
-  const base = import.meta.env.BASE_URL;
+  const base = "/";
 
   const categories = [
     { key: "menu_cat_1", name: "Sandwiches", img: `${base}uploads/2026/05/Crispy-Chicken-Sandwich-Chickrocks-USA-e1778512454281.jpg`, slug: "burger-sandwich" },
@@ -43,7 +43,7 @@ const MenuCategories = () => {
             const imgKey = `${cat.key}_img`;
             const nameKey = `${cat.key}_name`;
             return (
-              <Link key={cat.key} to={`/menu#${cat.slug}`} className="flex flex-col items-center gap-3 group shrink-0 basis-1/3 snap-start md:basis-auto md:shrink">
+              <Link key={cat.key} href={`/menu#${cat.slug}`} className="flex flex-col items-center gap-3 group shrink-0 basis-1/3 snap-start md:basis-auto md:shrink">
                 <MediaEdit
                   id={imgKey}
                   isEditing={isEditing}

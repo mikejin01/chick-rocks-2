@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEdit } from "@/contexts/EditContext";
@@ -7,7 +7,7 @@ import { MediaEdit } from "@/components/ui/media-edit";
 
 const CrowdFavorites = () => {
   const { isEditing, getDraftValue, updateDraft } = useEdit();
-  const base = import.meta.env.BASE_URL;
+  const base = "/";
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   const scrollByCard = (direction: 1 | -1) => {
@@ -63,7 +63,7 @@ const CrowdFavorites = () => {
             value={getDraftValue("favorites_heading", "Customer Favorites")}
             onChange={(v) => updateDraft("favorites_heading", v)}
           />
-          <Link to="/menu" className="lg:hidden text-primary font-semibold text-sm hover:underline whitespace-nowrap shrink-0">
+          <Link href="/menu" className="lg:hidden text-primary font-semibold text-sm hover:underline whitespace-nowrap shrink-0">
             <InlineEdit
               id="favorites_view_menu"
               as="span"

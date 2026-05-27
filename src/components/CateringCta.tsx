@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { useEdit } from "@/contexts/EditContext";
 import { InlineEdit } from "@/components/ui/inline-edit";
 import { MediaEdit } from "@/components/ui/media-edit";
 
 const CateringCta = () => {
   const { isEditing, getDraftValue, updateDraft } = useEdit();
-  const base = import.meta.env.BASE_URL;
+  const base = "/";
   const defaultImg = `${base}uploads/2026/05/Share-Food-Chickrocks-USA-scaled.jpg`;
 
   return (
@@ -57,7 +57,7 @@ const CateringCta = () => {
               onChange={(v) => updateDraft("home_catering_body", v)}
             />
             <Link
-              to="/catering"
+              href="/catering"
               className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold uppercase tracking-wide hover:opacity-90 transition-opacity"
             >
               <InlineEdit

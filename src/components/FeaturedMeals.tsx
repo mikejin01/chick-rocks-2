@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { useEdit } from "@/contexts/EditContext";
 import { InlineEdit } from "@/components/ui/inline-edit";
 import { MediaEdit } from "@/components/ui/media-edit";
 
 const FeaturedMeals = () => {
   const { isEditing, getDraftValue, updateDraft } = useEdit();
-  const base = import.meta.env.BASE_URL;
+  const base = "/";
   const defaultImg = `${base}uploads/2026/05/ChatGPT-Image-May-8-2026-04_25_39-PM.png`;
 
   return (
@@ -42,7 +42,7 @@ const FeaturedMeals = () => {
               onChange={(v) => updateDraft("catering_body_1", v)}
             />
             <Link
-              to="/faq"
+              href="/faq"
               className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-full font-bold hover:opacity-90 transition-opacity"
             >
               <InlineEdit

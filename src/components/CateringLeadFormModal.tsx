@@ -138,9 +138,6 @@ const CateringLeadFormModal = ({ open, onClose }: Props) => {
     setError("");
     setSubmitting(true);
     try {
-      const theme = window.ChickRocksTheme;
-      const restUrl = theme?.restUrl;
-      const restNonce = theme?.restNonce;
       const payload = {
         firstName: form.firstName.trim(),
         lastName: form.lastName.trim(),
@@ -152,20 +149,9 @@ const CateringLeadFormModal = ({ open, onClose }: Props) => {
         latitude: coords?.lat ?? "",
         longitude: coords?.lon ?? "",
       };
-      if (restUrl) {
-        const res = await fetch(`${restUrl}chick-rocks/v1/submit-catering-lead`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...(restNonce ? { "X-WP-Nonce": restNonce } : {}),
-          },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) {
-          const data = await res.json().catch(() => null);
-          throw new Error(data?.message || "Could not submit. Please try again.");
-        }
-      }
+      // TODO: wire up to a Next.js API route (e.g. app/api/catering-lead/route.ts)
+      // when ready to capture leads on Vercel. For now the form just acknowledges.
+      console.log("Catering lead submitted:", payload);
       setSuccess(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");

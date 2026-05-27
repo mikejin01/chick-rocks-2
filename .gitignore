@@ -8,13 +8,14 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
-dist-ssr
 *.local
 
-# Generated WordPress theme output
-wordpress-theme
-wordpress-theme-upload
+# Next.js
+.next/
+out/
+next-env.d.ts
+.vercel
+tsconfig.tsbuildinfo
 
 # Editor directories and files
 .vscode/*
@@ -30,3 +31,4 @@ wordpress-theme-upload
 # Local dev artifacts
 .claude/
 live-snapshot/
+test-connection.mjs

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Instagram, Facebook } from "lucide-react";
 import { useEdit } from "@/contexts/EditContext";
 import { useOrderModal } from "@/contexts/OrderModalContext";
@@ -93,7 +93,7 @@ const TikTokIcon = ({ className }: { className?: string }) => (
 const Footer = () => {
   const { isEditing, getDraftValue, updateDraft } = useEdit();
   const { open: openOrderModal } = useOrderModal();
-  const base = import.meta.env.BASE_URL;
+  const base = "/";
   const defaultLogo = `${base}logo.webp`;
 
   return (
@@ -103,7 +103,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-7 md:gap-8 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
             <Link
-              to="/"
+              href="/"
               aria-label="Chick Rocks home"
               className="inline-flex items-center gap-3 hover:opacity-90 transition-opacity"
             >
@@ -207,7 +207,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <Link to="/menu" className="hover:opacity-100 transition-opacity">
+                <Link href="/menu" className="hover:opacity-100 transition-opacity">
                   <InlineEdit
                     id="footer_col1_link_6"
                     as="span"
@@ -218,7 +218,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:opacity-100 transition-opacity">
+                <Link href="/about" className="hover:opacity-100 transition-opacity">
                   <InlineEdit
                     id="footer_col1_link_2"
                     as="span"
@@ -229,7 +229,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="hover:opacity-100 transition-opacity">
+                <Link href="/blog" className="hover:opacity-100 transition-opacity">
                   <InlineEdit
                     id="footer_col1_link_3"
                     as="span"
@@ -240,7 +240,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/catering" className="hover:opacity-100 transition-opacity">
+                <Link href="/catering" className="hover:opacity-100 transition-opacity">
                   <InlineEdit
                     id="footer_col1_link_4"
                     as="span"
@@ -251,7 +251,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="hover:opacity-100 transition-opacity">
+                <Link href="/faq" className="hover:opacity-100 transition-opacity">
                   <InlineEdit
                     id="footer_col1_link_5"
                     as="span"
@@ -263,7 +263,7 @@ const Footer = () => {
               </li>
               <li className="basis-full h-0 md:hidden" aria-hidden="true" />
               <li className="md:hidden">
-                <Link to="/privacy" className="hover:opacity-100 transition-opacity">
+                <Link href="/privacy" className="hover:opacity-100 transition-opacity">
                   <InlineEdit
                     id="footer_privacy_link"
                     as="span"
@@ -274,7 +274,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li className="md:hidden">
-                <Link to="/terms" className="hover:opacity-100 transition-opacity">
+                <Link href="/terms" className="hover:opacity-100 transition-opacity">
                   <InlineEdit
                     id="footer_terms_link"
                     as="span"
@@ -297,7 +297,7 @@ const Footer = () => {
             />
             <ul className="space-y-2 text-sm opacity-70">
               <li>
-                <Link to="/menu#burger-sandwich-combo" className="hover:opacity-100 transition-opacity">
+                <Link href="/menu#burger-sandwich-combo" className="hover:opacity-100 transition-opacity">
                   <InlineEdit
                     id="footer_col2_link_1"
                     as="span"
@@ -308,7 +308,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/menu#chicken-wings" className="hover:opacity-100 transition-opacity">
+                <Link href="/menu#chicken-wings" className="hover:opacity-100 transition-opacity">
                   <InlineEdit
                     id="footer_col2_link_2"
                     as="span"
@@ -319,7 +319,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/menu#rice-bowl" className="hover:opacity-100 transition-opacity">
+                <Link href="/menu#rice-bowl" className="hover:opacity-100 transition-opacity">
                   <InlineEdit
                     id="footer_col2_link_3"
                     as="span"
@@ -330,7 +330,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/menu#rocks-spaghetti-combo" className="hover:opacity-100 transition-opacity">
+                <Link href="/menu#rocks-spaghetti-combo" className="hover:opacity-100 transition-opacity">
                   <InlineEdit
                     id="footer_col2_link_4"
                     as="span"
@@ -341,7 +341,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/menu#beverages" className="hover:opacity-100 transition-opacity">
+                <Link href="/menu#beverages" className="hover:opacity-100 transition-opacity">
                   <InlineEdit
                     id="footer_col2_link_5"
                     as="span"
@@ -488,7 +488,7 @@ const Footer = () => {
             </p>
           </div>
           <div className="hidden md:flex gap-4">
-            <Link to="/privacy" className="hover:opacity-100 transition-opacity">
+            <Link href="/privacy" className="hover:opacity-100 transition-opacity">
               <InlineEdit
                 id="footer_privacy_link"
                 as="span"
@@ -497,7 +497,7 @@ const Footer = () => {
                 onChange={(v) => updateDraft("footer_privacy_link", v)}
               />
             </Link>
-            <Link to="/terms" className="hover:opacity-100 transition-opacity">
+            <Link href="/terms" className="hover:opacity-100 transition-opacity">
               <InlineEdit
                 id="footer_terms_link"
                 as="span"

@@ -1,5 +1,4 @@
-import React, { createContext, useContext, ReactNode } from "react";
-import { useEditToggle } from "@/hooks/use-edit-toggle";
+import { createContext, useContext, type ReactNode } from "react";
 
 interface EditContextType {
   isEditing: boolean;
@@ -16,15 +15,28 @@ interface EditContextType {
   refreshTextContent: () => Promise<void>;
 }
 
-const EditContext = createContext<EditContextType | undefined>(undefined);
+const noop = () => {};
+const asyncNoop = async () => {};
 
-export const EditProvider = ({ children }: { children: ReactNode }) => {
-  const edit = useEditToggle();
-  return <EditContext.Provider value={edit}>{children}</EditContext.Provider>;
+const stubValue: EditContextType = {
+  isEditing: false,
+  isSaving: false,
+  isLoggedIn: false,
+  currentLanguage: "en",
+  content: {},
+  draft: {},
+  isLoadingPageData: false,
+  getDraftValue: (_key, defaultValue) => defaultValue,
+  toggleEditing: noop,
+  updateDraft: noop,
+  saveContent: asyncNoop,
+  refreshTextContent: asyncNoop,
 };
 
-export const useEdit = () => {
-  const ctx = useContext(EditContext);
-  if (!ctx) throw new Error("useEdit must be used within an EditProvider");
-  return ctx;
-};
+const EditContext = createContext<EditContextType>(stubValue);
+
+export const EditProvider = ({ children }: { children: ReactNode }) => (
+  <EditContext.Provider value={stubValue}>{children}</EditContext.Provider>
+);
+
+export const useEdit = () => useContext(EditContext);
