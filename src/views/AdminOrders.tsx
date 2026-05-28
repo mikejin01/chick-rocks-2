@@ -73,9 +73,12 @@ function speak(text: string) {
   window.speechSynthesis.speak(u);
 }
 
+const ALERT_PHRASE = "You've got an order, please confirm it";
+const REMINDER_INTERVAL_MS = 10_000;
+
 function playNewOrderAlert() {
   playChime();
-  setTimeout(() => speak("You got an order"), 650);
+  setTimeout(() => speak(ALERT_PHRASE), 650);
 }
 
 const storeName = (id: string) => STORES.find((s) => s.id === id)?.name ?? id;
@@ -230,6 +233,22 @@ export default function AdminOrders() {
       );
     }
   }, [data, soundEnabled]);
+
+  const unconfirmedCount = useMemo(
+    () => (data ?? []).filter((o) => o.status === "paid").length,
+    [data]
+  );
+
+  // While any order is sitting unconfirmed, ring the alarm every 10s as a nag.
+  // The initial alert on arrival still fires from the diff effect above; this
+  // takes over to keep reminding until the staff hits Confirm.
+  useEffect(() => {
+    if (!soundEnabled || unconfirmedCount === 0) return;
+    const id = setInterval(() => {
+      playNewOrderAlert();
+    }, REMINDER_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [soundEnabled, unconfirmedCount]);
 
   const toggleSound = useCallback(() => {
     const next = !soundEnabled;
